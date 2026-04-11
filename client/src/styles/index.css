@@ -1,0 +1,211 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 12px);
+  --radius-4xl: calc(var(--radius) + 16px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+}
+
+/* ── Pastel Minimal Palette ── */
+:root {
+  --radius: 0.75rem;
+
+  /* Backgrounds: warm off-white with a faint lavender tint */
+  --background: #f8f7ff;
+  --foreground: #3d3654;
+
+  /* Cards: pure white with subtle lift */
+  --card: #ffffff;
+  --card-foreground: #3d3654;
+
+  /* Popovers */
+  --popover: #ffffff;
+  --popover-foreground: #3d3654;
+
+  /* Primary: soft lavender-indigo */
+  --primary: #8b7cf6;
+  --primary-foreground: #ffffff;
+
+  /* Secondary: blush/soft rose */
+  --secondary: #fce8f3;
+  --secondary-foreground: #7c3066;
+
+  /* Muted: light lavender grey */
+  --muted: #f0eeff;
+  --muted-foreground: #7c73a0;
+
+  /* Accent: soft mint */
+  --accent: #e0f7f1;
+  --accent-foreground: #2d7a65;
+
+  /* Destructive: soft peach-red */
+  --destructive: #f87171;
+
+  /* Borders and inputs: very light lavender */
+  --border: #e5e1ff;
+  --input: #ede9ff;
+  --ring: #c4b8ff;
+
+  /* Charts – pastel spectrum */
+  --chart-1: #a78bfa;
+  /* lavender */
+  --chart-2: #6ee7b7;
+  /* mint */
+  --chart-3: #fcd34d;
+  /* soft yellow */
+  --chart-4: #f9a8d4;
+  /* pink */
+  --chart-5: #93c5fd;
+  /* sky */
+
+  /* Sidebar */
+  --sidebar: #f0eeff;
+  --sidebar-foreground: #3d3654;
+  --sidebar-primary: #8b7cf6;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #fce8f3;
+  --sidebar-accent-foreground: #7c3066;
+  --sidebar-border: #e5e1ff;
+  --sidebar-ring: #c4b8ff;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+  }
+}
+
+/* ── Pastel utility classes ── */
+@layer utilities {
+  .pastel-card {
+    background: #ffffff;
+    border: 1px solid #e5e1ff;
+    border-radius: 0.875rem;
+    box-shadow: 0 2px 12px 0 rgba(139, 124, 246, 0.07);
+    transition: box-shadow 0.2s ease, transform 0.2s ease;
+  }
+
+  .pastel-card:hover {
+    box-shadow: 0 6px 24px 0 rgba(139, 124, 246, 0.13);
+    transform: translateY(-1px);
+  }
+
+  .pastel-hero {
+    background: linear-gradient(135deg, #ede9ff 0%, #fce8f3 50%, #e0f7f1 100%);
+  }
+
+  .pastel-badge-lavender {
+    background: #ede9ff;
+    color: #6d5ce8;
+    border: 1px solid #d4ccff;
+  }
+
+  .pastel-badge-mint {
+    background: #e0f7f1;
+    color: #2d7a65;
+    border: 1px solid #b2edd9;
+  }
+
+  .pastel-badge-rose {
+    background: #fce8f3;
+    color: #a0366e;
+    border: 1px solid #f5bfde;
+  }
+
+  .pastel-badge-amber {
+    background: #fff8e6;
+    color: #a16207;
+    border: 1px solid #fde68a;
+  }
+
+  .pastel-badge-sky {
+    background: #e0f2fe;
+    color: #0369a1;
+    border: 1px solid #bae6fd;
+  }
+
+  .pastel-badge-red {
+    background: #fff1f2;
+    color: #be123c;
+    border: 1px solid #fecdd3;
+  }
+
+  /* Stat icon containers */
+  .stat-icon-lavender {
+    background: #ede9ff;
+    color: #7c3aed;
+  }
+
+  .stat-icon-mint {
+    background: #e0f7f1;
+    color: #059669;
+  }
+
+  .stat-icon-amber {
+    background: #fff8e6;
+    color: #d97706;
+  }
+
+  .stat-icon-rose {
+    background: #fce8f3;
+    color: #db2777;
+  }
+
+  .stat-icon-sky {
+    background: #e0f2fe;
+    color: #0284c7;
+  }
+
+  .stat-icon-red {
+    background: #fff1f2;
+    color: #e11d48;
+  }
+
+  .stat-icon-purple {
+    background: #f3e8ff;
+    color: #9333ea;
+  }
+}
