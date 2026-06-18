@@ -7,10 +7,27 @@ import nodemailer from "nodemailer";
 
 export const registerUser = async (req, res) => {
   try {
-    const { name, designation, qualification, department, subDepartment, institution, contact, email, password, role } = req.body;
+    const {
+    name,
+    designation,
+    qualification,
+    department,
+    subDepartment,
+    institution,
+    contact,
+    email,
+    password,
+    role,
+  } = req.body;
 
-    const existingUser = await User.findOne({ email });
-    if (existingUser) return res.status(400).json({ message: "User already exists" });
+  // Validate email format
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!emailRegex.test(email)) {
+    return res.status(400).json({ message: "Invalid email format" });
+  }
+
+  const existingUser = await User.findOne({ email });
+  if (existingUser) return res.status(400).json({ message: "User already exists" });
 
     const hashedPassword = await bcrypt.hash(password, 10);
 

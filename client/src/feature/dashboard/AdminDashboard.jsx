@@ -1,10 +1,9 @@
 import { useState, lazy, Suspense } from "react";
-import { LayoutDashboard, FileText, Megaphone, Inbox, LogOut, Search } from "lucide-react";
+import { LayoutDashboard, FileText, Megaphone, LogOut, Search } from "lucide-react";
 import { useAuth } from "../../context/AuthContext";
 import AdminProposals from "./admin/AdminProposals";
 import AdminDocuments from "./admin/AdminDocuments";
 import AdminAnnouncements from "./admin/AdminAnnouncements";
-import AdminQueries from "./admin/AdminQueries";
 
 const Documents = lazy(() => import("../documents/Documents"));
 
@@ -17,7 +16,6 @@ export default function AdminDashboard() {
     { id: "manage_docs", label: "Manage Documents", icon: <FileText className="h-5 w-5" /> },
     { id: "docs_center", label: "Document Center", icon: <Search className="h-5 w-5" /> },
     { id: "announcements", label: "Manage Announcements", icon: <Megaphone className="h-5 w-5" /> },
-    { id: "queries", label: "Contact Queries", icon: <Inbox className="h-5 w-5" /> },
   ];
 
   const renderContent = () => {
@@ -30,7 +28,6 @@ export default function AdminDashboard() {
         </Suspense>
       );
       case "announcements": return <AdminAnnouncements />;
-      case "queries": return <AdminQueries />;
       default: return <AdminProposals />;
     }
   };

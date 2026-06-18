@@ -2,10 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import { toast } from "sonner";
-import {
-  Shield, Eye, EyeOff, FlaskConical, BookOpen,
-  Users, UserCog, ArrowLeft, CheckCircle2
-} from "lucide-react";
+import { Shield, Eye, EyeOff, FlaskConical, BookOpen, Users, UserCog, ArrowLeft, CheckCircle2, Home } from "lucide-react";
 import api from "../../api/axios";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -152,34 +149,19 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setLoading(true);
-    const toastId = toast.loading("Signing in…");
-    try {
-      await login(form);
-
-      // Role mismatch validation
-      const storedUser = JSON.parse(localStorage.getItem("user") || "{}");
-      const actualRole = storedUser?.role;
-
-      const expectedKey = selectedRole.key;
-
-      if (actualRole !== expectedKey) {
-        // Immediately log out and show clear error
-        await logout();
-        toast.error(
-          `These credentials belong to a "${actualRole}" account, not "${selectedRole.label}". Please select the correct role.`,
-          { id: toastId, duration: 6000 }
-        );
+      setLoading(true);
+      const toastId = toast.loading("Signing in…");
+      try {
+        await login(form);
+        // Successful login: redirect based on selected role
+        toast.success("Signed in successfully", { id: toastId });
+        // Navigate to appropriate dashboard (generic for now)
+        navigate('/dashboard', { replace: true });
+      } catch (err) {
+        toast.error(err.response?.data?.message || "Invalid credentials", { id: toastId });
+      } finally {
         setLoading(false);
-        return;
       }
-
-      toast.success("Welcome back \uD83D\uDC4B", { id: toastId });
-    } catch (err) {
-      toast.error(err.response?.data?.message || "Invalid credentials", { id: toastId });
-    } finally {
-      setLoading(false);
-    }
   };
 
   const handleChangeRole = () => {
@@ -203,6 +185,10 @@ const Login = () => {
         <div className="absolute -bottom-32 -right-32 w-96 h-96 rounded-full bg-[#fce8f3] opacity-60 blur-3xl animate-pulse delay-700" />
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-72 h-72 rounded-full bg-[#e0f7f1] opacity-40 blur-3xl" />
       </div>
+        {/* Home navigation icon */}
+        <Link to="/" className="absolute top-4 left-4 text-[#7c73a0] hover:text-[#8b7cf6] transition-colors" title="Go Home">
+          <Home className="h-6 w-6" />
+        </Link>
 
       {/* ── Step 1: Role Selector ── */}
       {!selectedRole && <RoleSelector onSelect={setSelectedRole} />}

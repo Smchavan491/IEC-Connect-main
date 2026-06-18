@@ -8,8 +8,8 @@ const userSchema = new mongoose.Schema(
     department: { type: String, required: true },
     subDepartment: { type: String },
     institution: { type: String, required: true },
-    contact: { type: String, required: true },
-    email: { type: String, required: true, unique: true },
+    contact: { type: String },
+    email: { type: String, required: true, match: [/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/, "Invalid email format"] },
     password: { type: String, required: true },
     role: {
       type: String,

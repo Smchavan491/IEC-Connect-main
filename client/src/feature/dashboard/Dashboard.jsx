@@ -1,6 +1,5 @@
 import React, { Suspense } from "react";
 import { useAuth } from "../../context/AuthContext";
-import ContactAndFeedback from "../../components/shared/ContactAndFeedback";
 
 const ResearcherDashboard = React.lazy(() => import("./ResearcherDashboard"));
 const ReviewerDashboard = React.lazy(() => import("./ReviewerDashboard"));
@@ -51,7 +50,6 @@ export default function Dashboard() {
         <div className="flex-1">
           {renderDashboard()}
         </div>
-        <ContactAndFeedback />
       </div>
     </Suspense>
   );

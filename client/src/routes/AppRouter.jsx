@@ -24,12 +24,23 @@ import Contact from "../feature/website/Contact";
 
 /** Redirect authenticated staff/admin away from the public home to their dashboard. */
 function RootRedirect() {
-  const { user, status } = useAuth();
+  const { user, status, userRole } = useAuth();
 
   if (status === "loading") return null;
 
   if (user) {
-    return <Navigate to="/dashboard" replace />;
+    // Redirect based on role if specific routes exist
+    switch (userRole) {
+      case "admin":
+        return <Navigate to="/dashboard" replace />; // Adjust if admin has dedicated route
+      case "scrutiny":
+        return <Navigate to="/dashboard" replace />;
+      case "reviewer":
+        return <Navigate to="/dashboard" replace />;
+      case "researcher":
+      default:
+        return <Navigate to="/dashboard" replace />;
+    }
   }
 
   return <WebsiteHome />;

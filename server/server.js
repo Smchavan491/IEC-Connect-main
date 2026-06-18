@@ -49,7 +49,9 @@ app.use(cors({
 
     const allowedList = [normalizedAllowed, "http://localhost:5173", "http://127.0.0.1:5173"];
 
-    if (!origin || allowedList.includes(normalizedOrigin)) {
+    const isLocalhost = /^http:\/\/(localhost|127\.0\.0\.1)(:\d+)?$/.test(normalizedOrigin);
+
+    if (!origin || allowedList.includes(normalizedOrigin) || isLocalhost) {
       callback(null, true);
 
     } else {

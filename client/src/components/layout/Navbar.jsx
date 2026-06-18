@@ -72,10 +72,7 @@ export default function Navbar() {
                   </span>
                 </div>
                 
-                <Link to="/announcements" className="p-2 rounded-xl text-[#7c73a0] hover:text-[#8b7cf6] hover:bg-[#f0eeff] transition-all relative group" title="Announcements & Notifications">
-                  <Bell className="h-5 w-5" />
-                  <span className="absolute top-2 right-2 w-2 h-2 bg-[#e11d48] rounded-full border-2 border-white group-hover:scale-110 transition-transform"></span>
-                </Link>
+
               </div>
 
               {/* Logout Button */}
