@@ -165,13 +165,23 @@ export const forgotPassword = async (req, res) => {
       return res.status(500).json({ message: "Server email is not configured. Please contact the administrator." });
     }
 
-    transporter = nodemailer.createTransport({
-      service: "gmail",
-      auth: {
-        user: process.env.EMAIL_USER,
-        pass: process.env.EMAIL_PASS,
-      },
-    });
+      transporter = nodemailer.createTransport({
+        service: "gmail",
+        auth: {
+          user: process.env.EMAIL_USER,
+          pass: process.env.EMAIL_PASS,
+        },
+        secure: false,
+        port: 587,
+      });
+      // Verify connection configuration
+      transporter.verify((error, success) => {
+        if (error) {
+          console.error("Nodemailer configuration error:", error);
+        } else {
+          console.log("Nodemailer server is ready to take messages");
+        }
+      });
 
     const message = {
       from: `"EthixPortal" <${process.env.EMAIL_USER}>`,
