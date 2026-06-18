@@ -7,7 +7,7 @@ const navLinks = [
   { to: "/about",        label: "About IEC" },
   { to: "/guidelines",   label: "Submission Guidelines" },
   { to: "/documents-required", label: "Required Documents" },
-  { to: "/announcements", label: "Announcements" },
+
   { to: "/contact",      label: "Contact" },
 ];
 
